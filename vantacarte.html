@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Vantawave Template" />
+    <meta name="keywords" content="Vantawave, creative, html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vantawave</title>
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/barfiller.css" type="text/css" />
+    <link rel="stylesheet" href="css/nowfont.css" type="text/css" />
+    <link rel="stylesheet" href="css/rockville.css" type="text/css" />
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+    <style>
+      body {
+        background-color: #363030;
+      }
+
+      .container {
+        max-width: 1200px;
+      }
+
+      .img-fluid {
+        max-width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+
+      .form-control:focus {
+        background-color: #363030;
+        color: #c2c0c0;
+        outline: none;
+        box-shadow: none;
+      }
+
+      .btn-block {
+        width: 100%;
+      }
+      /* General content box styling */
+      .content-box {
+        border: 1px solid #c2c0c0;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #2b2b2b;
+      }
+
+      /* Hide image and adjust layout on small screens */
+      @media (max-width: 768px) {
+        .img-fluid {
+          display: none; /* Hide the image on small screens */
+        }
+
+        .content-box {
+          border: 1px solid #c2c0c0;
+          padding: 15px;
+          background-color: #2b2b2b;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Optional: Add a subtle shadow */
+        }
+      }
+
+      /* Modal Background */
+      .card-img {
+        display: none; /* Initially hidden */
+        position: fixed;
+        z-index: 1;
+        width: 20rem;
+        height: 20rem;
+        top: 10%; /* Adjust this value as needed to control the vertical position */
+        left: 50%;
+        transform: translateX(-50%); /* Centers the modal horizontally */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow for better visibility */
+        border-radius: 8px; /* Optional: Add rounded corners */
+        padding: 1rem; /* Optional: Add padding inside the modal */
+      }
+
+      /* Modal Content */
+      .card-img .modal-content {
+        background-color: rgba(0, 0, 0, 0.4);
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        border-radius: 8px;
+      }
+
+      /* Close Button */
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: #000;
+        text-decoration: none;
+      }
+
+      /* Card Image */
+      #cardImage {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body class="vantacarte_container">
+    <!-- Page Preloder -->
+    <div id="preloder">
+      <div class="loader"></div>
+    </div>
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="breadcrumb__links">
+              <a href="./index.html" class="text-white"
+                ><i class="fa fa-home"></i>Accueil</a
+              >
+              <span>Vantacarte</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <div
+      class="container mt-5 p-4"
+      style="
+        background-color: #1a1a1a;
+        border: 1px solid #363030;
+        border-radius: 12px;
+      "
+    >
+      <div class="row align-items-center">
+        <!-- Image Section -->
+        <div class="col-md-6 text-center mb-4 mb-md-0">
+          <img
+            src="/img/events/cardsuscription.jpg"
+            alt="Card Subscription"
+            class="img-fluid rounded shadow-lg"
+            style="max-width: 100%; border-radius: 8px"
+          />
+        </div>
+
+        <!-- Form Section -->
+        <div class="col-md-6">
+          <div
+            class="contact__form p-4 rounded shadow-lg"
+            style="background-color: #2b2b2b"
+          >
+            <form method="post" id="form">
+              <div class="row">
+                <!-- Name Input -->
+                <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                  <input
+                    class="form-control form-control-lg"
+                    type="text"
+                    id="nom"
+                    name="nom"
+                    placeholder="Nom"
+                    style="
+                      background-color: #1e1e1e;
+                      color: #c2c0c0;
+                      border: 1px solid #363030;
+                      border-radius: 6px;
+                    "
+                    required
+                  />
+                </div>
+                <!-- Surname Input -->
+                <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                  <input
+                    class="form-control form-control-lg"
+                    type="text"
+                    id="prenom"
+                    name="prenom"
+                    placeholder="Prénom"
+                    style="
+                      background-color: #1e1e1e;
+                      color: #c2c0c0;
+                      border: 1px solid #363030;
+                      border-radius: 6px;
+                    "
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="row">
+                <!-- Email Input -->
+                <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                  <input
+                    class="form-control form-control-lg"
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Email"
+                    style="
+                      background-color: #1e1e1e;
+                      color: #c2c0c0;
+                      border: 1px solid #363030;
+                      border-radius: 6px;
+                    "
+                    required
+                  />
+                </div>
+                <!-- Card Select -->
+                <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                  <select
+                    name="carte"
+                    id="cardSelect"
+                    class="form-control form-control-lg"
+                    style="
+                      background-color: #1e1e1e;
+                      color: #c2c0c0;
+                      border: 1px solid #363030;
+                      border-radius: 6px;
+                    "
+                    required
+                  ></select>
+                </div>
+              </div>
+
+              <!-- Physical Card Option -->
+              <div class="mb-3">
+                <p class="m-0 p-0" style="color: #c2c0c0">
+                  Besoin de carte physique?
+                </p>
+                <select
+                  name="carte-physique"
+                  id="carte_physique"
+                  class="form-control form-control-lg mt-2"
+                  style="
+                    background-color: #1e1e1e;
+                    color: #c2c0c0;
+                    border: 1px solid #363030;
+                    border-radius: 6px;
+                  "
+                >
+                  <option value="" disabled selected>Choisir</option>
+                  <option value="pvc">PVC</option>
+                  <option value="badge">Badge</option>
+                  <option value="coque">Coque phone</option>
+                </select>
+              </div>
+
+              <!-- Error Message -->
+              <p id="cartes-charges" class="text-center" style="color: red"></p>
+
+              <!-- Submit Button -->
+
+              <div class="text-center mt-4">
+                <button
+                  id="payButton"
+                  class="btn btn-dark buy-ticket-btn"
+                  style="color: #c2c0c0; background-color: none"
+                  type="submit"
+                >
+                  <img
+                    src="/img/icon.png"
+                    alt="Pay Icon"
+                    style="width: 1.2rem; height: 1.2rem; margin-right: 10px"
+                  />
+                  Payer
+                </button>
+                <button
+                  id="obtainCardButton"
+                  class="btn btn-dark text-center"
+                  style="color: #c2c0c0; background-color: none"
+                  type="submit"
+                >
+                  Obtenir
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="cardModal" class="modal card-img">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <img id="cardImage" src="" alt="Carte Image" />
+      </div>
+    </div>
+    <!-- Modal -->
+    <div
+      id="msgalert"
+      class="modal fade"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modalLabel"
+      aria-hidden="true"
+      data-backdrop="static"
+      data-keyboard="false"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <p id="alert-msg" class="mb-0"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/jquery.barfiller.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/config.js"></script>
+    <!-- Music Plugin -->
+    <script src="js/jquery.jplayer.min.js"></script>
+    <script src="js/jplayerInit.js"></script>
+
+    <script>
+      function displayMessage(message) {
+        // Set the message in the paragraph
+        document.getElementById("alert-msg").innerText = message;
+
+        // Show the modal
+        const modal = new bootstrap.Modal(document.getElementById("msgalert"));
+        modal.show();
+      }
+
+      $(document).ready(function () {
+        $("#carte_physique").parent().hide();
+        $("#payButton").hide();
+        // Object containing additional charges for physical cards
+        const cartesPhysiques = {
+          pvc: 100,
+          coque: 200,
+          badge: 100,
+        };
+
+        let price = 0;
+
+        // Show additional charge message when a physical card is selected
+        $("#carte_physique").on("change", function (e) {
+          const selectedValue = e.target.value;
+          if (cartesPhysiques.hasOwnProperty(selectedValue)) {
+            // Convert the charge to a number and add to price
+            const additionalCharge = parseFloat(cartesPhysiques[selectedValue]);
+            price += additionalCharge;
+            $("#cartes-charges").html(
+              `Cette option vient avec une charge supplémentaire de ${additionalCharge} fcfa`
+            );
+          }
+        });
+
+        // Modal handling functions
+        const cardModal = $("#cardModal");
+        const cardImage = $("#cardImage");
+        const closeModalBtn = $(".close");
+
+        const openModal = (imageUrl) => {
+          cardImage.attr("src", imageUrl);
+          cardModal.show();
+        };
+
+        const closeModal = () => {
+          cardModal.hide();
+        };
+
+        // Handle card selection and display modal with image
+        $("#cardSelect").on("change", function () {
+          const selectedCard = $(this).val();
+          const selectedCardName = $(this).find("option:selected").data("name");
+          const selectedCardPrice = $(this)
+            .find("option:selected")
+            .data("price");
+
+          // Show or hide the physical card option
+          if (selectedCardName.toLowerCase() !== "standard") {
+            $("#carte_physique").parent().show();
+            $("#payButton").show();
+            $("#obtainCardButton").hide();
+          } else {
+            $("#carte_physique").parent().hide();
+            $("#payButton").hide();
+            $("#obtainCardButton").show();
+          }
+
+          if (selectedCard) {
+            $.ajax({
+              url: `${apiConfig.apiUrl}/api/cartes`,
+              method: "GET",
+              success: function (response) {
+                const filteredEvent = response.data.find(
+                  (event) => parseInt(event.id) === parseInt(selectedCard)
+                );
+                if (filteredEvent && filteredEvent.photo) {
+                  // Convert the price to a number and add to price
+                  const cardPrice = parseFloat(
+                    filteredEvent.prix || selectedCardPrice
+                  );
+                  price = cardPrice;
+                  const backgroundImageUrl = `${apiConfig.apiUrl}/${filteredEvent.photo}`;
+                  openModal(backgroundImageUrl);
+                } else {
+                  console.warn(
+                    "Aucune image trouvée pour la carte sélectionnée."
+                  );
+                }
+              },
+              error: function (error) {
+                console.error(
+                  "Erreur lors de la récupération des événements:",
+                  error
+                );
+              },
+            });
+          } else {
+            console.warn("Aucune carte sélectionnée.");
+          }
+        });
+
+        // Close modal when the close button is clicked
+        closeModalBtn.on("click", closeModal);
+
+        // Close modal if the user clicks anywhere outside of it
+        $(window).on("click", (event) => {
+          if ($(event.target).is(cardModal)) {
+            closeModal();
+          }
+        });
+
+        // Function to generate a simple UUID (Version 4)
+        const generateUUID = () => {
+          return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+            /[xy]/g,
+            (c) => {
+              const r = (Math.random() * 16) | 0;
+              const v = c === "x" ? r : (r & 0x3) | 0x8;
+              return v.toString(16);
+            }
+          );
+        };
+
+        // Load available cards
+        $.ajax({
+          url: `${apiConfig.apiUrl}/api/cartes`,
+          method: "GET",
+          success: function (response) {
+            console.log("Data:", response.data);
+            let options = `<option value="" disabled selected>Choisir carte</option>`;
+            if (response.data) {
+              response.data.forEach((item) => {
+                options += `<option value="${item.id}" data-price="${item.prix}" data-name="${item.nom}" ${item.status}>${item.nom}</option>`;
+              });
+              $("#cardSelect").append(options);
+            }
+          },
+          error: function (error) {
+            alert("Erreur lors de la récupération des données.");
+            console.error(error);
+          },
+        });
+
+        $("#form").on("submit", (event) => {
+          event.preventDefault();
+          const formDataFreecard = {
+            nom: $("#nom").val(),
+            prenom: $("#prenom").val(),
+            email: $("#email").val(),
+            carte: $("#cardSelect").val(),
+            carte_physique: 0,
+          };
+          const formData = {
+            nom: $("#nom").val(),
+            prenom: $("#prenom").val(),
+            email: $("#email").val(),
+            carte: $("#cardSelect").val(),
+            carte_physique: $("#carte_physique").val(),
+          };
+
+          const uid = generateUUID();
+          localStorage.setItem("transaction_uid_card_sell", uid);
+          localStorage.setItem("card-data", JSON.stringify(formData));
+         
+          
+          if ($("#payButton").is(":visible")) {
+            // Handle payment process
+            fetch(`${apiConfig.apiUrl}/api/payment/initiate`, {
+              method: "POST",
+              body: JSON.stringify({
+                portefeuille: "66d070b014ad1744dea8e0c96",
+                reference: localStorage.getItem("transaction_uid_card_sell"),
+                redirect_success: `${apiConfig.siteConfig}/cardsuccess.html`,
+                redirect_error: `${apiConfig.siteConfig}/vantacarte.html`,
+                amount: price,
+                disbursement: true,
+                logoURL: `${apiConfig.siteConfig}/img/vantacard-logo.jpeg`,
+                isTransfer: false,
+              }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                window.location.href = data.data.link;
+              })
+              .catch((error) => {
+                console.error("Erreur:", error);
+                Swal.fire({
+                  title: "Erreur",
+                  text: "Une erreur est survenue lors du traitement du paiement.",
+                  icon: "error",
+                });
+              });
+          } else {
+            obtainCardButtonData(formDataFreecard);
+          }
+        });
+      });
+
+      function obtainCardButtonData(formDataFreecard) {
+        displayMessage("Abonnement en cours", "warning");
+        $.ajax({
+          url: `${apiConfig.apiUrl}/api/abonnement`,
+          method: "POST",
+          data: formDataFreecard,
+          success: function () {
+            displayMessage("Abonnement effectué avec succès!", "success");
+            $("#form")[0].reset();
+          },
+          error: function (error) {
+            displayMessage(
+              "Erreur lors de la soumission des données.",
+              "error"
+            );
+            console.error(error);
+          },
+        });
+      }
+    </script>
+  </body>
+</html>

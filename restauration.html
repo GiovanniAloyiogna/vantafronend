@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zxx">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="DJoz Template" />
+    <meta name="keywords" content="DJoz, unica, creative, html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vanatwave</title>
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+  </head>
+
+  <body style="background-color: black">
+    <!-- Page Preloader -->
+    <div id="preloder">
+      <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+    <header class="header" style="background-color: rgb(4, 4, 4)">
+      <div class="container">
+        <div class="row">
+          <div class="col-6 col-lg-2">
+            <div class="header__logo">
+              <a href="./index.html">
+                <img
+                  src="img/logovantawave.png"
+                  alt=""
+                  style="width: 4rem; height: 4rem"
+                />
+              </a>
+            </div>
+          </div>
+          <div class="col-6 col-lg-10">
+            <div class="header__nav">
+              <nav class="header__menu mobile-menu">
+                <ul class="d-flex justify-content-end">
+                  <li>
+                    <a href="./index.html" style="color: #c2c0c0">Accueil</a>
+                  </li>
+                  <li>
+                    <a href="/blog.html" style="color: #c2c0c0">Newsroom</a>
+                  </li>
+                  <li class="active">
+                    <a href="/restauration.html" style="color: #c2c0c0"
+                      >Services</a
+                    >
+                  </li>
+                  <li>
+                    <a href="/organisateur.html" style="color: #c2c0c0"
+                      >Organisateurs</a
+                    >
+                  </li>
+                  <li><a href="#contact" style="color: #c2c0c0">Contact</a></li>
+
+                  <li>
+                    <a href="/cart.html" style="color: #c2c0c0">
+                      <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                      <span class="cart-count">(0)</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+      </div>
+    </header>
+
+    <section class="container-fluid" id="restauration-container">
+      <!-- First Row: Heading and Text -->
+      <div class="row mt-5" style="min-height: 20rem">
+        <div
+          class="col-12 text-center d-flex justify-content-center align-items-center flex-column"
+        >
+          <h1 class="text-white display-4">Best food selling</h1>
+          <span class="text-white fs-5">
+            Plongez dans un monde de saveurs exquises avec notre Drak Burger,
+            une véritable fusion de délices. Imaginez une galette de viande
+            juteuse, grillée à la perfection, garnie de fromage fondant, de
+            légumes frais croquants, et d'une sauce maison secrète qui éveille
+            les papilles. Chaque bouchée est une explosion de goût qui ravira
+            votre palais !
+          </span>
+        </div>
+      </div>
+
+      <!-- Second Row: Background Color Section -->
+      <div class="row">
+        <div
+          class="col-12"
+          style="background-color: white; min-height: 6rem"
+        ></div>
+      </div>
+    </section>
+
+    <section class="container-fluid py-5" style="background-color: #363030">
+      <!-- Dropdown for filtering products by category -->
+      <div class="row mb-4">
+        <div class="col-12 text-center">
+          <select
+            class="form-select w-50 mx-auto"
+            id="categoryFilter"
+            aria-label="Filter by category"
+          >
+            <option selected value="">Select Category</option>
+            <!-- <option value="category1">Category 1</option>
+            <option value="category2">Category 2</option>
+            <option value="category3">Category 3</option> -->
+          </select>
+        </div>
+      </div>
+
+      <!-- Product Grid -->
+      <div class="row" id="product-container"></div>
+    </section>
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/products.js"></script>
+    <script>
+      $(document).ready(function () {
+        // Function to update the cart count in the header
+        function updateCartCount() {
+          let cart = JSON.parse(localStorage.getItem("cart")) || [];
+          $(".cart-count").text(`(${cart.length})`);
+        }
+
+        // Call the function to update cart count when the page loads
+        updateCartCount();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+# Redirect all .html pages to the main page (index.html)
+RewriteEngine On
+
+# Allow access to index.html only
+RewriteCond %{REQUEST_URI} !^/index\.html$
+RewriteCond %{REQUEST_URI} \.html$ [NC]
+RewriteRule ^.*$ - [F,L]
+
+# Alternatively, redirect all requests to index.html
+RewriteCond %{REQUEST_URI} !^/index\.html$ [NC]
+RewriteCond %{REQUEST_URI} !\.(css|js|png|jpg|gif|ico|svg)$ [NC] # Allow static resources like CSS, JS, images
+RewriteRule ^.*$ /index.html [L]

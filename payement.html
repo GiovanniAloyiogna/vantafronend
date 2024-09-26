@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="css/main.css" type="text/css" />
+    <style>
+      .container {
+        padding: 20px;
+        width: 100%;
+        background-color: #444;
+      }
+
+      .receipt-main {
+        background-color: #444;
+        border: none;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        color: #c2c0c0;
+        border-radius: 10px;
+        width: 100%;
+        margin: 0 auto;
+        max-width: 800px;
+      }
+
+      .receipt-header,
+      .receipt-footer {
+        margin-bottom: 20px;
+      }
+
+      .receipt-header img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .receipt-header h5,
+      .receipt-footer h5 {
+        font-size: 18px;
+        color: #c2c0c0;
+      }
+
+      .receipt-right h5 {
+        font-size: 20px;
+        font-weight: bold;
+        color: #c2c0c0;
+      }
+
+      .receipt-header-mid {
+        margin: 20px 0;
+        border-bottom: 1px solid #c2c0c0;
+        padding-bottom: 10px;
+      }
+
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+
+      .table th {
+        background-color: black;
+        color: white;
+        padding: 10px;
+        text-align: left;
+        border-bottom: 2px solid #c2c0c0;
+      }
+
+      .table td {
+        padding: 10px;
+        color: #c2c0c0;
+        border-bottom: 1px solid #c2c0c0;
+      }
+
+      .text-danger strong {
+        color: red;
+      }
+
+      .receipt-footer {
+        border-top: 1px solid #c2c0c0;
+        padding-top: 15px;
+      }
+
+      .receipt-footer h5 {
+        text-align: center;
+        font-size: 16px;
+        color: red;
+      }
+
+      .receipt-left .btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 5px;
+      }
+
+      .btn-primary {
+        background-color: red;
+        border: none;
+        color: white;
+      }
+
+      .btn-danger {
+        background-color: #363030;
+        color: white;
+        border: 1px solid red;
+      }
+
+      @media (max-width: 768px) {
+        .receipt-main {
+          padding: 15px;
+        }
+
+        .receipt-header,
+        .receipt-footer {
+          text-align: center;
+        }
+
+        .table th,
+        .table td {
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body style="background-color: black">
+    <div class="receipt-main" style="background-color: #171717">
+      <div class="receipt-header">
+        <div style="display: flex; justify-content: space-between">
+          <div class="receipt-left">
+            <img
+              src="img/vantawavelogo2.png"
+              alt="Logo"
+              style="max-width: rem; max-height: 4rem"
+            />
+          </div>
+          <div class="receipt-right text-right">
+            <h5>Vantawave</h5>
+            <p>066675091 <i class="fa fa-phone"></i></p>
+            <p>vantawave@gmail.com <i class="fa fa-envelope-o"></i></p>
+            <p>Gabon <i class="fa fa-location-arrow"></i></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="receipt-header receipt-header-mid">
+        <div style="display: flex; justify-content: space-between">
+          <div class="receipt-right">
+            <h5 id="customer-name"></h5>
+            
+            <p><b>Email:</b> <span id="customer-email"></span></p>
+            <p><b>Adresse:</b> Gabon</p>
+          </div>
+        </div>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Carte</th>
+            <th>Billet</th>
+            <th>Montant</th>
+            <th>Réduction</th>
+          </tr>
+        </thead>
+        <tbody id="bill-data">
+          <!-- Dynamic rows will be appended here -->
+        </tbody>
+      </table>
+
+      <div class="receipt-footer">
+        <div style="display: flex; justify-content: space-between">
+          <div class="receipt-right">
+            <p><b>Date:</b> <span id="current-date"></span></p>
+          </div>
+          <div class="receipt-left d-flex justify-content-center">
+            <button
+              id="payButton"
+              class="btn btn-primary m-2"
+              type="button"
+              style="
+                background-color: #363030;
+                color: #ffffff;
+                border: none;
+                border-radius: 50px;
+                padding: 12px 25px;
+              "
+            >
+              Payer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="msgalert"
+      class="modal fade"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modalLabel"
+      aria-hidden="true"
+      data-backdrop="static"
+      data-keyboard="false"
+    >
+      <div class="modal-dialog modal-fullscreen" role="document">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <p id="alert-msg" class="mb-0"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+     <script src="js/config.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/jquery.barfiller.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/reservation.js"></script>
+    <script src="js/jquery.jplayer.min.js"></script>
+    <script src="js/jplayerInit.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        const uuid = localStorage.getItem("uuid");
+
+        const generateUUID = () => {
+          return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+            /[xy]/g,
+            (c) => {
+              const r = (Math.random() * 16) | 0;
+              const v = c === "x" ? r : (r & 0x3) | 0x8;
+              return v.toString(16);
+            }
+          );
+        };
+
+        // Fetch bills data from API
+        $.ajax({
+          url: `${apiConfig.apiUrl}/api/reservations/bills/${uuid}`,
+          method: "GET",
+          success: function (response) {
+            const bills = response?.data || [];
+            let totalPrixCartes = 0;
+            let totalPrix = 0;
+
+            // Set first bill details
+            if (bills.length > 0) {
+              const firstBill = bills[0];
+              $("#customer-name").text(`${firstBill.nom} ${firstBill.prenom}`);
+              $("#customer-email").text(firstBill.email);
+
+              // Iterate over bills and append to table
+              bills.forEach(function (bill) {
+                totalPrixCartes = parseFloat(bill.total_prix_cartes).toFixed(2);
+                totalPrix = parseFloat(bill.total_prix).toFixed(2);
+
+                $("#bill-data").append(`
+              <tr>
+                <td>${bill.nom_evenement}</td>
+                <td>${bill.type}</td>
+                <td>${bill.type_billet}</td>
+                <td>${bill.prix_billet}</td>
+                <td>${bill.carte_reduction}</td>
+              </tr>
+            `);
+              });
+
+              const reduction = totalPrixCartes - totalPrix;
+
+              // Append totals
+              $("#bill-data").append(`
+            <tr>
+              <td class="text-right">
+                <p><strong>Total Montant:</strong></p>
+                <p><strong>Montant Payable:</strong></p>
+                <p><strong>Réduction:</strong></p>
+              </td>
+              <td>
+                <p><strong>${totalPrixCartes} FCFA</strong></p>
+                <p><strong>${totalPrix} FCFA</strong></p>
+                <p><strong>${reduction} FCFA</strong></p>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-right">
+                <h2><strong>Total:</strong></h2>
+              </td>
+              <td class="text-left text-danger">
+                <h2>${totalPrix} FCFA</h2>
+              </td>
+            </tr>
+          `);
+
+              // Set current date
+              $("#current-date").text(
+                new Date().toLocaleDateString("fr-FR", {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+              );
+
+              // Handle payment process
+              $("#payButton").on("click", function () {
+                let reference_uid = generateUUID();
+                localStorage.setItem("reference_uid_payment", reference_uid);
+                // Prepare payment data
+                // const paymentData = {
+                //   amount: totalPrix,
+                //   reference: reference_uid,
+                //   client_msisdn: phoneNumber,
+                //   portefeuille: "66d070b014ad1744dea8ec96",
+                //   isTransfer: true,
+                //   transactionfinanciere_id: reference_uid,
+                //   uuid: uuid,
+                //   type: "ticket",
+                // };
+                fetch(`${apiConfig.apiUrl}/api/payment/initiate`, {
+                  method: "POST",
+                  body: JSON.stringify({
+                    portefeuille: "66d070b014ad1744dea8e0c96",
+                    reference: reference_uid,
+                    redirect_success: `${apiConfig.siteConfig}/ticket-success.html`,
+                    redirect_error: `${apiConfig.siteConfig}/payement.html`,
+
+                    amount: totalPrix,
+                    disbursement: true,
+                    logoURL: `${apiConfig.apiUrl}/img/vantacard-logo.jpeg`,
+                    isTransfer: false,
+                  }),
+
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                })
+                  .then((res) => res.json())
+                  .then((data) => {
+                    console.log(data.data.link);
+                    window.location.href = data.data.link;
+                  })
+                  .catch((error) => {
+                    console.error("Erreur:", error);
+                    Swal.fire({
+                      title: "Erreur",
+                      text: "Une erreur est survenue lors du traitement du paiement.",
+                      icon: "error",
+                    });
+                  });
+              });
+            }
+          },
+          error: function (error) {
+            console.log("Error fetching bills:", error);
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

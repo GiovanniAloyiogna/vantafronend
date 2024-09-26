@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Vanatwave - Cart" />
+    <meta name="keywords" content="Vanatwave, Cart, Shopping" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vanatwave - Cart</title>
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+  </head>
+
+  <body style="background-color: black">
+    <!-- Page Preloader -->
+    <div id="preloder">
+      <div class="loader"></div>
+    </div>
+
+    <!-- Cart Items Section -->
+    <section class="container-fluid py-5" style="background-color: #363030">
+      <!-- Cart Items List -->
+      <div
+        class="row justify-content-around align-items-center"
+        id="cart-items-container"
+      ></div>
+
+      <!-- Total Price Display -->
+      <div class="row justify-content-center mt-3">
+        <div class="col-12 col-md-10 text-white text-end">
+          <h3>Total: <span id="cart-total-price">0</span> Fcfa</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cart Summary and Client Details Form -->
+    <section class="container-fluid py-5" style="background-color: white">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+          <h2>Résumé de votre commande</h2>
+          <div id="cart-summary" class="mb-4"></div>
+
+          <!-- Client Details Form -->
+          <form id="client-details-form" class="text-center">
+            <button
+              id="payer-btn"
+              class="btn btn-dark text-center"
+              type="button"
+            >
+              WhatsApp
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- Cart Section End -->
+
+    <!-- JS Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/config.js"></script>
+    <script>
+      const baseUrl = `${apiConfig.apiUrl}`;
+      // Mock data: Load cart items from localStorage (for testing)
+      const mockCartItems = [];
+
+      // Save mock data to localStorage if not already set (for testing)
+      if (!localStorage.getItem("cart")) {
+        localStorage.setItem("cart", JSON.stringify(mockCartItems));
+      }
+
+      // Retrieve cart items from localStorage and load them into the cart
+      function loadCartItems() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const cartContainer = document.getElementById("cart-items-container");
+        const cartSummary = document.getElementById("cart-summary");
+        cartContainer.innerHTML = ""; // Clear existing items
+        cartSummary.innerHTML = ""; // Clear existing summary
+
+        cart.forEach((item) => {
+          // Create item row with name, price, quantity input, and remove button
+          const itemRow = `
+                <div class="col-md-3 col-lg-3 col-sm-12 m-2 cart-item" style="background-color:white; position: relative;">
+                    <div class="pt-1 text-center">
+                        <img src="${apiConfig.apiUrl}/${
+            item.photo
+          }" class="img-fluid" />
+                        <h3>${item.name}</h3>
+                        <button class="remove-item-btn" style="position: absolute; top: 10px; right: 10px; background-color: red; color: white; border: none; border-radius: 5px; padding: 5px;">Supprimer</button>
+                    </div>
+                    <span class="item-price" data-price="${
+                      item.price
+                    }">Prix unitaire: ${item.price}</span>
+                    <input type="number" class="item-quantity form-control" value="${
+                      item.quantity
+                    }" min="1" data-id="${item.id}">
+                    <span class="item-total-price">Prix total: ${(
+                      parseFloat(item.price) * parseFloat(item.quantity)
+                    ).toFixed(2)}</span>
+                </div>
+                `;
+          cartContainer.insertAdjacentHTML("beforeend", itemRow);
+
+          // Add summary row
+          const summaryRow = `
+                <div class="d-flex justify-content-between">
+                    <span>${item.name} (x${item.quantity})</span>
+                    <span>${(item.price * item.quantity).toFixed(2)} Fcfa</span>
+                </div>
+                `;
+          cartSummary.insertAdjacentHTML("beforeend", summaryRow);
+        });
+
+        updateCartTotal();
+      }
+
+      // Update the cart in localStorage
+      function updateCartInLocalStorage(id, quantity) {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const updatedCart = cart.map((item) =>
+          item.id === id ? { ...item, quantity: quantity } : item
+        );
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+      }
+
+      // Calculate and update total price and cart summary
+      function updateCartTotal() {
+        const cartItems = document.querySelectorAll(".cart-item");
+        let total = 0;
+        const cartSummary = document.getElementById("cart-summary");
+        cartSummary.innerHTML = ""; // Clear existing summary
+
+        cartItems.forEach((item) => {
+          const price = parseFloat(
+            item.querySelector(".item-price").dataset.price
+          );
+          const quantity = parseInt(item.querySelector(".item-quantity").value);
+          total += price * quantity;
+
+          // Update item total price display
+          item.querySelector(".item-total-price").textContent = `Prix total: ${(
+            price * quantity
+          ).toFixed(2)} Fcfa`;
+
+          // Update localStorage with new quantity
+          const id = parseInt(item.querySelector(".item-quantity").dataset.id);
+          updateCartInLocalStorage(id, quantity);
+
+          // Add summary row
+          const summaryRow = `
+                <div class="d-flex justify-content-between">
+                    <span>${
+                      item.querySelector("h3").textContent
+                    } (x${quantity})</span>
+                    <span>${(price * quantity).toFixed(2)} Fcfa</span>
+                </div>
+                `;
+          cartSummary.insertAdjacentHTML("beforeend", summaryRow);
+        });
+
+        document.getElementById("cart-total-price").textContent =
+          total.toFixed(2);
+      }
+
+      // Event listener for quantity change
+      document
+        .getElementById("cart-items-container")
+        .addEventListener("change", (event) => {
+          if (event.target.classList.contains("item-quantity")) {
+            updateCartTotal();
+          }
+        });
+
+      // Event listener for remove button click
+      document
+        .getElementById("cart-items-container")
+        .addEventListener("click", (event) => {
+          if (event.target.classList.contains("remove-item-btn")) {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const itemName = event.target
+              .closest(".cart-item")
+              .querySelector("h3").textContent;
+
+            // Filter out the item to be removed
+            const updatedCart = cart.filter((item) => item.name !== itemName);
+            localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+            // Reload cart items to reflect the change
+            loadCartItems();
+          }
+        });
+
+      // Event listener for WhatsApp button click
+      document.getElementById("payer-btn").addEventListener("click", () => {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let message = "Résumé de votre commande:\n\n";
+
+        cart.forEach((item) => {
+          message += `${item.name} (x${item.quantity}): ${(
+            parseFloat(item.price) * parseFloat(item.quantity)
+          ).toFixed(2)} Fcfa\n`;
+        });
+
+        const totalPrice =
+          document.getElementById("cart-total-price").textContent;
+        message += `\nTotal: ${totalPrice} Fcfa\n\n`;
+
+        // Encode the message for URL
+        const encodedMessage = encodeURIComponent(message);
+        const phoneNumber = "+24166675091"; // Replace with the actual phone number
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
+
+        // Open WhatsApp
+        window.open(whatsappUrl, "_blank");
+
+        location.reload();
+      });
+
+      // Initial load
+      loadCartItems();
+    </script>
+  </body>
+</html>
