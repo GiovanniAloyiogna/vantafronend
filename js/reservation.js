@@ -129,7 +129,7 @@ $(document).ready(function () {
                                                           .map(
                                                             (item) => `
                                                             <option value="${item.id}">
-                                                                ${item.nom} - $${item.prix}
+                                                                ${item.nom} - ${item.prix}
                                                             </option>
                                                         `
                                                           )

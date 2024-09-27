@@ -147,7 +147,7 @@ $(document).ready(function () {
 
       // window.location.href = $(this).find("a").attr("href"); // Navigate to the desired page
       if (localStorage.getItem("selectedEventId")) {
-        window.location.href = "blog-details.html";
+        window.location.href = "details.html";
       }
     });
 
